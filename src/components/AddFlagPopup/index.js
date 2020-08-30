@@ -5,9 +5,10 @@ const close = () => {
   document.getElementById('addFeatureFlag').style.display = "none";
 }
 
-const addFlag = () => {
+const addFlag = async () => {
   const flag = {"group": "one", "flagName": "goodTest", "flag": 888};
-  postData('http://localhost:8081/services/add', flag);
+  const result = await postData('http://localhost:8081/services/add', flag);
+  console.log(">>>>>", result);
 }
 
 const postData = async (url = '', data = {}) => {
@@ -15,10 +16,7 @@ const postData = async (url = '', data = {}) => {
   The solution is to add body-parser and send stringified JSON */
 
   const response = await fetch(url, {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    //headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    //headers: {'Content-Type': 'x-www-form-urlencoded'},
-    //headers: { 'Content-Type': 'application/json'},
+    method: 'POST',
     headers: {'Content-Type': 'text/plain' },
     body: JSON.stringify(data)
   });
@@ -36,8 +34,12 @@ const Renderer = () => {
     <div id="addFeatureFlag" className={styles.modal}>
       <div className={styles.modalContent}>
         <span onClick={ () => { close() } } className={styles.close}>&times;</span>
-        <p>Some text in the Modal..</p>
-        <button onClick={ () => { addFlag() } }>ADD FLAG</button>
+        <div className={styles.flagProperties}>
+          <p><label>FLAG NAME</label> <input type="text" /></p>
+          <p><label>GROOUP</label> <input type="text" /></p>
+          <p><label>VALUE</label> <input type="text" /></p>
+          <p><button onClick={ () => { addFlag() } }>ADD FLAG</button></p>
+        </div>          
       </div>      
     </div>
   );
