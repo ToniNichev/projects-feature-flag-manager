@@ -1,0 +1,26 @@
+.title {
+  background: rgb(141, 141, 172);
+  color: black;
+  text-align: center;
+  font-family: MyFont;
+}
+
+.wrapper {
+  background: rgb(243, 243, 247);
+  display:flex;
+  color: black;
+} 
+
+.flagWrapper {
+  border: 1px solid silver;
+  padding: 10px;
+}
+
+.leftRail {
+  width:80%;
+  text-align: left;
+}
+
+.rightRail {
+
+}
