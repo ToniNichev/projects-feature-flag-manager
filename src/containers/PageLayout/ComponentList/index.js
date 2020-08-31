@@ -13,13 +13,13 @@ const About = Loadable({
   loader: () => import ('../../../components/About'),
   loading: Loading
 });
-const Greetings = Loadable({
-  loader: () => import ('../../../components/Greetings'),
+const Setup = Loadable({
+  loader: () => import ('../../../components/Setup'),
   loading: Loading
 });
 export default {
-  Home: Home,
-  About: About,
-  Greetings: Greetings,
-  Header: Header
+  Home,
+  About,
+  Setup,
+  Header,
 }

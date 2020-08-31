@@ -61,8 +61,8 @@ export default {
         span: 12,
         components:[
           {
-            name: "Greetings",
-            props: { user: "Sam"}
+            name: "Setup",
+            props: {}
           }
         ] 
       },        

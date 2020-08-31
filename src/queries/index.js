@@ -1,11 +1,6 @@
 
 import mongoDB  from'../connectors/database/mongodb';
- 
-/*
-const getDogsListTest = async () => {      
-    return mongoDB.find({}, 'Dogs');
-} 
-*/ 
+
 
 export default {
 
@@ -24,111 +19,42 @@ export default {
     return result;     
    },
 
+   updateFeatureFlag: async (searchObject, newObject) => {
+    mongoDB.add(searchObject, newObject, 'featureFlags', () => {
+      return true;
+    });     
+   },    
+
    addFeatureFlag: async (flagData) => {
     mongoDB.add(flagData, 'featureFlags', () => {
-      console.log("DONE");
       return true;
     });     
    }, 
+
+   dropdb: async () => {
+    const result = mongoDB.dropDB();
+    return result;
+   },
 
    setup: async () => {
      mongoDB.dropDB();
      const obj = [
       {
-        url: '/about',
-        template: "Html",    
-        layout: [ 
-          {
-            span: 12,
-            components: [
-              {
-                name: "Header",
-                props: {}
-              }
-            ]
-          },
-          {
-            span: 12,
-            components:[
-              {
-                name: "About",
-                props: {}
-              }
-            ] 
-          }         
-        ]    
+        "flagName" : "quickLinks",
+        "value": "on",
+        "group": "switches"
       },
       {
-        url: '/home',
-        template: "Html",              
-        layout: [ 
-          {
-            span: 12,
-            components: [
-              {
-                name: "Header",
-                props: {}
-              }
-            ]
-          },
-          {
-            span: 12,
-            components:[
-              {
-                name: "Home",
-                props: {}
-              }
-            ] 
-          },        
-        ]
-      },
-      {
-        url: '/greetings',
-        template: "Html",    
-        layout: [ 
-          {
-            span: 12,        
-            components: [
-              {
-                name: "Header",
-                props: {}
-              }
-            ]
-          },
-          {
-            span: 12,
-            components:[
-              {
-                name: "Greetings",
-                props: { user: "Sam"}
-              }
-            ] 
-          },        
-        ]
-      },
-      {
-        url: '/other-template',
-        template: "OtherHtml",      
-        layout: [ 
-          {
-            span: 12,
-            components:[
-              {
-                name: "Greetings",
-                props: {}
-              }
-            ] 
-          },        
-        ]
-      }    
+        "flagName" : "linksTwo",
+        "value": "on",
+        "group": "switches"
+      }            
      ]
     
 
-    mongoDB.add(obj, 'Pages', () => {
-      console.log("DONE");
-    });
-    //const result = await mongoDB.setup({}, 'Pages');
-    //return result;     
+    mongoDB.add(obj, 'featureFlags', () => {
+
+    }); 
    }   
 
 }

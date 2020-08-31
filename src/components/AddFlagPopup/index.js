@@ -8,7 +8,6 @@ const close = () => {
 const addFlag = async () => {
   const flag = {"group": "one", "flagName": "goodTest", "flag": 888};
   const result = await postData('http://localhost:8081/services/add', flag);
-  console.log(">>>>>", result);
 }
 
 const postData = async (url = '', data = {}) => {

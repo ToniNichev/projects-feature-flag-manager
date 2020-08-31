@@ -68,7 +68,7 @@ app.get('/Robots.txt', (req, res) => {
   `)
 });
 
-app.get('/services/get', 
+app.post('/services/get', 
   async (req, res) => {
 
   const result = await queries.getFeatureFlags();
@@ -80,10 +80,8 @@ app.get('/services/get',
   .send(result);  
 });
 
-app.post('/services/add', async (req, res) => {
+app.post('/services/edit', async (req, res) => {
   const flagData = JSON.parse(req.body);
-  console.log(">>>", response);
-
   const result = await queries.addFeatureFlag(flagData);
   res
   .status(200)
@@ -92,6 +90,37 @@ app.post('/services/add', async (req, res) => {
   .set('Access-Control-Allow-Headers', '*')
   .send(" 12345 ");  
 });
+app.post('/services/add', async (req, res) => {
+  const flagData = JSON.parse(req.body);
+  const result = await queries.addFeatureFlag(flagData);
+  res
+  .status(200)
+  .set('Content-Type', 'application/json')
+  .set('Access-Control-Allow-Origin', '*')
+  .set('Access-Control-Allow-Headers', '*')
+  .send(" 12345 ");  
+});
+
+app.post('/services/setup', async (req, res) => {
+  queries.setup();
+  res
+  .status(200)
+  .set('Content-Type', 'application/json')
+  .set('Access-Control-Allow-Origin', '*')
+  .set('Access-Control-Allow-Headers', '*')
+  .send('{"status": "sucess"}');  
+});
+
+app.post('/services/dropdb', async (req, res) => {
+  const respond = queries.dropdb();
+  res
+  .status(200)
+  .set('Content-Type', 'application/json')
+  .set('Access-Control-Allow-Origin', '*')
+  .set('Access-Control-Allow-Headers', '*')
+  .send(respond);  
+});
+
 
 app.get('/*', 
   requestDataFromAPI, 
