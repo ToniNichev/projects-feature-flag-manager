@@ -46,10 +46,15 @@ export default {
         "group": "switches"
       },
       {
-        "flagName" : "linksTwo",
+        "flagName" : "featuredNewsHero",
         "value": "on",
         "group": "switches"
-      }            
+      },
+      {
+        "flagName" : "latestNews",
+        "value": "on",
+        "group": "switches"
+      }                  
      ]
     
 

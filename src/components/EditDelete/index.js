@@ -6,7 +6,6 @@ const editFlag = () => {
 
 
 const Renderer = ({flagEditable, editFlag}) => {  
-  console.log("!!!!!!!!!", flagEditable);
   if(!flagEditable) {
     return (
       <button onClick={() => { editFlag()} }>EDIT</button>
@@ -14,7 +13,10 @@ const Renderer = ({flagEditable, editFlag}) => {
   }
   else {
     return (
-      <button onClick={() => { editFlag()} }>!!!!</button>
+      <div>
+        <button className={styles.deleteButton} onClick={() => { editFlag()} }>DELETE</button>
+        <button onClick={() => { editFlag()} }>CANCEL</button>
+      </div>
     );
   }
 

@@ -17,12 +17,13 @@
 }
 
 .leftRail {
-  width:80%;
+  width:90%;
   text-align: left;
 }
 
 .rightRail {
-  width: 20%;
+  width: 10%;
+  min-width: 100px;
   button {
     width: 100%;
     padding: 5px;

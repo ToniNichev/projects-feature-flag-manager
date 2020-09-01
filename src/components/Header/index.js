@@ -8,8 +8,8 @@ const Header = ( {title} ) => (
     <div className={styles.wrapper}>      
       <h2>{ title } { process.env.APP_NAME } </h2>
       <ul>
-        <li><Link to='/home'>HOME</Link></li>
-        <li><Link to='/greetings'>GREETINGS</Link></li>       
+        <li><Link to='/home'>FLAGS</Link></li>
+        <li><Link to='/greetings'>SETTINGS</Link></li>       
         <li><Link to='/about'>ABOUT</Link></li>
       </ul>
     </div>
