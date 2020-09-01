@@ -60,7 +60,7 @@ class Renderer extends Component {
           </div>      
           <div className={styles.rightRail}>
             <button onClick={() => { this.addFlag()} }>+ ADD</button>
-            <EditDelete flagEditable={this.flagEditable} editFlag={ () => { this.editFlag() } } />
+            <EditDelete flagEditable={ this.state.flagEditable } editFlag={ () => { this.editFlag() } } />
           </div>
           {this.state.addFlagVisible ? <AddFlagPopup closePopup={ () => {this.closePopup() } } /> : null}
       </div>

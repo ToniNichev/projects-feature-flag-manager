@@ -6,9 +6,18 @@ const editFlag = () => {
 
 
 const Renderer = ({flagEditable, editFlag}) => {  
-  return (
-    <button onClick={() => { editFlag()} }>EDIT</button>
-  );
+  console.log("!!!!!!!!!", flagEditable);
+  if(!flagEditable) {
+    return (
+      <button onClick={() => { editFlag()} }>EDIT</button>
+    );
+  }
+  else {
+    return (
+      <button onClick={() => { editFlag()} }>!!!!</button>
+    );
+  }
+
 }
 
 export default Renderer;
