@@ -20,7 +20,8 @@ export default {
    },
 
    updateFeatureFlag: async (searchObject, newObject) => {
-    mongoDB.add(searchObject, newObject, 'featureFlags', () => {
+     delete newObject._id;
+    mongoDB.update(searchObject, newObject, 'featureFlags', (result) => {
       return true;
     });     
    },    

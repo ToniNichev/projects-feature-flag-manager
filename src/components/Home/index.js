@@ -1,49 +1,72 @@
-import React, {useEffect, useState} from 'react';
+import React, {Component} from 'react';
 import styles from './styles.scss';
 import ToggleSwitch from '../ToggleSwitch';
+import BulletPoint from '../BulletPoint';
 import AddFlagPopup from '../AddFlagPopup';
 import poster from '../../utils/postData';
+import EditDelete from '../EditDelete';
 
-const getFlags = async () => {
-  if(JSON.stringify(result) !== JSON.stringify(window.__API_DATA__)) {
-    useForceUpdate();
+
+class Renderer extends Component {
+  
+  
+  constructor(props) {
+    super(props);
+    this.getFlags();
+    this.addFlagVisible = false;
+    this.state = {
+      addFlagVisible: false,
+      flagEditable: false,
+    };
   }  
-  const result = await poster.postData('http://localhost:8081/services/get', {});
-  window.__API_DATA__ = result;
-}
+  
 
-function useForceUpdate(){
-  const [value, setValue] = useState(0); // integer state
-  return () => setValue(value => ++value); // update the state to force render
-}
+  addFlag() {
+    this.setState({addFlagVisible: true});
+  }
 
+  closePopup() {
+    this.setState({addFlagVisible: false});    
+    this.getFlags();
+  }  
 
-const Renderer = ({title}) => {
-  const featureFlags = typeof global.__API_DATA__ !== 'undefined' ? global.__API_DATA__ : window.__API_DATA__;
-  const [value, setValue] = useState(0); // integer state
-  const forceUpdate = useForceUpdate();
- 
-  useEffect(() => {
-    getFlags();
-  });
+  async getFlags() { 
+    const result = await poster.postData('http://localhost:8081/services/get', {});
 
-  return (
-    <div className={styles.wrapper}>
-        <div className={styles.leftRail}>
-          <div className={styles.title}>FLAGS</div>
-            {featureFlags.map( (flag) => 
-              <div className={styles.flagWrapper}><span className={styles.flagName}>{flag.flagName}</span><span className={styles.flagValue}><ToggleSwitch featureFlagName={flag.flagName} /></span></div>
-            )}
-        </div>      
-        <div className={styles.rightRail}>
-          <button onClick={() => { addFlag()} }>+ ADD</button>
-        </div>
-        <button onClick={forceUpdate}>
-          Click to re-render
-        </button>
-        <AddFlagPopup />
-    </div>
-  );
+    if(JSON.stringify(result) !== JSON.stringify(window.__API_DATA__)) {
+      window.__API_DATA__ = result;
+      this.forceUpdate();
+    } 
+  }
+
+  editFlag() {
+    this.setState({flagEditable: !this.state.flagEditable});     
+  }
+
+  render() {
+    const featureFlags = typeof global.__API_DATA__ !== 'undefined' ? global.__API_DATA__ : window.__API_DATA__;
+
+    return (
+      <div className={styles.wrapper}>
+          <div className={styles.leftRail}>
+            <div className={styles.title}>FLAGS</div>
+              {featureFlags.map( (flag) => 
+                <div key={flag.flagName} className={styles.flagWrapper}>
+                  <BulletPoint status={this.state.flagEditable} />
+                  <span className={styles.flagName}>{flag.flagName}</span>
+                  <span className={styles.flagValue}><ToggleSwitch featureFlagName={flag.flagName} val={flag.value} /></span>
+                </div>
+              )}
+          </div>      
+          <div className={styles.rightRail}>
+            <button onClick={() => { this.addFlag()} }>+ ADD</button>
+            <EditDelete flagEditable={this.flagEditable} editFlag={ () => { this.editFlag() } } />
+          </div>
+          {this.state.addFlagVisible ? <AddFlagPopup closePopup={ () => {this.closePopup() } } /> : null}
+      </div>
+    );
+  }
+
 }
 
 export default Renderer;

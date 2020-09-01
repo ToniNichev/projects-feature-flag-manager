@@ -80,9 +80,10 @@ app.post('/services/get',
   .send(result);  
 });
 
-app.post('/services/edit', async (req, res) => {
+app.post('/services/update', async (req, res) => {
   const flagData = JSON.parse(req.body);
-  const result = await queries.addFeatureFlag(flagData);
+  //console.log(">>>>>", flagData);
+  const result = await queries.updateFeatureFlag(flagData.updateFlag, flagData.newFlagData);
   res
   .status(200)
   .set('Content-Type', 'application/json')
