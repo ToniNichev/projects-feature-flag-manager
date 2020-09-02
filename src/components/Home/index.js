@@ -5,7 +5,7 @@ import BulletPoint from '../BulletPoint';
 import AddFlagPopup from '../AddFlagPopup';
 import poster from '../../utils/postData';
 import EditDelete from '../EditDelete';
-
+import { apiUrl } from '../../utils/getParams';
 
 class Renderer extends Component {
   
@@ -31,7 +31,10 @@ class Renderer extends Component {
   }  
 
   async getFlags() { 
-    const result = await poster.postData('http://localhost:8081/services/get', {});
+    // run this only on client side
+    if(typeof window == 'undefined')
+      return;
+    const result = await poster.postData(`${apiUrl}/get`, {});
 
     if(JSON.stringify(result) !== JSON.stringify(window.__API_DATA__)) {
       window.__API_DATA__ = result;
@@ -44,6 +47,7 @@ class Renderer extends Component {
   }
 
   render() {
+    console.log(">>>>>>>>>", apiUrl);
     const featureFlags = typeof global.__API_DATA__ !== 'undefined' ? global.__API_DATA__ : window.__API_DATA__;
 
     return (

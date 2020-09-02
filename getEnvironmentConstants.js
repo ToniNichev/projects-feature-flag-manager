@@ -1,5 +1,6 @@
 const fs = require('fs');
 
+
 // expose environment variables to the frontend
 const frontendConstants = [
   'APP_NAME',

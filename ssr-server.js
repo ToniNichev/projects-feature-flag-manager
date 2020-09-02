@@ -82,7 +82,6 @@ app.post('/services/get',
 
 app.post('/services/update', async (req, res) => {
   const flagData = JSON.parse(req.body);
-  //console.log(">>>>>", flagData);
   const result = await queries.updateFeatureFlag(flagData.updateFlag, flagData.newFlagData);
   res
   .status(200)

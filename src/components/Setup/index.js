@@ -1,14 +1,15 @@
 import React from 'react';
 import styles from './styles.scss';
 import poster from '../../utils/postData';
+import { apiUrl } from '../../utils/getParams';
 
 const setupDatabase = async () => {
-  const result = await poster.postData('http://localhost:8081/services/setup', {});
+  const result = await poster.postData(`${apiUrl}/setup`, {});
   console.log(result);
 }
 
 const dropDatabase = async () => {
-  const result = await poster.postData('http://localhost:8081/services/dropdb', {});
+  const result = await poster.postData(`${apiUrl}/dropdb`, {});
   console.log(result);
 }
 

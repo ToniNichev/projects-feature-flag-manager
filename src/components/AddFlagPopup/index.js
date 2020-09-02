@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styles from './styles.scss';
-
-const close = () => {
-  document.getElementById('addFeatureFlag').style.display = "none";
-}
+import { apiUrl } from '../../utils/getParams';
 
 const addFlag = async (closePopup) => {
   const flag = {
@@ -11,7 +8,7 @@ const addFlag = async (closePopup) => {
     "flagName": document.getElementById('addFeatureFlag').querySelector("input.flagName").value ,
     "value": document.getElementById('addFeatureFlag').querySelector("input.value").value,
   };
-  const result = await postData('http://localhost:8081/services/add', flag);
+  const result = await postData(`${apiUrl}/add`, flag);
   closePopup();
 }
 

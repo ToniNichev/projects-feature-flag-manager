@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './styles.scss';
 import poster from '../../utils/postData';
+import { apiUrl } from '../../utils/getParams';
 
 const switchToggled = async (featureFlagName) => {
   const flag = findFlagByName(featureFlagName);
@@ -11,7 +12,7 @@ const switchToggled = async (featureFlagName) => {
     },
     newFlagData: flag
   }
-  const result = await poster.postData('http://localhost:8081/services/update', postData);
+  const result = await poster.postData(`${apiUrl}/update`, postData);
 }
 
 const findFlagByName = (flagName) => {
