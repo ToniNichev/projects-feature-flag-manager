@@ -80,6 +80,18 @@ app.post('/services/get',
   .send(result);  
 });
 
+app.post('/services/find', 
+  async (req, res) => {
+  const flagData = JSON.parse(req.body);
+  const result = await queries.findFeatureFlagByName(flagData.flagName);
+  res
+  .status(200)
+  .set('Content-Type', 'application/json')
+  .set('Access-Control-Allow-Origin', '*')
+  .set('Access-Control-Allow-Headers', '*')
+  .send(result);  
+});
+
 app.post('/services/update', async (req, res) => {
   const flagData = JSON.parse(req.body);
   const result = await queries.updateFeatureFlag(flagData.updateFlag, flagData.newFlagData);

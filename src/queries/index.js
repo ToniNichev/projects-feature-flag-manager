@@ -4,15 +4,11 @@ import mongoDB  from'../connectors/database/mongodb';
 
 export default {
 
-    getDogByBreed: async (breed) => {
-      const result = await mongoDB.find({breed: breed}, 'Dogs');
+    findFeatureFlagByName: async (flagName) => {
+      const result = await mongoDB.find({ flagName }, 'featureFlags');
       return result;
     },
 
-   getDogsList: async () => {      
-    const result = await mongoDB.find({}, 'Dogs');
-    return result;
-   }, 
     
    getFeatureFlags: async (url) => {
     const result = await mongoDB.find({}, 'featureFlags');

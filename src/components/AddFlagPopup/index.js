@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './styles.scss';
 import { apiUrl } from '../../utils/getParams';
+import EventsManager from  '../../containers/EventsManager';
 
 const addFlag = async (closePopup) => {
   const flag = {
@@ -8,8 +9,14 @@ const addFlag = async (closePopup) => {
     "flagName": document.getElementById('addFeatureFlag').querySelector("input.flagName").value ,
     "value": document.getElementById('addFeatureFlag').querySelector("input.value").value,
   };
-  const result = await postData(`${apiUrl}/add`, flag);
-  closePopup();
+  const searchResult = await postData(`${apiUrl}/find`,  {'flagName' : flag.flagName} );  
+  if(searchResult.length > 0) {
+    EventsManager.callEvent('showPopup')(`Flag with name: ${flag.flagName} already exists!`);
+  }
+  else {
+    const result = await postData(`${apiUrl}/add`, flag);
+    closePopup();
+  }
 }
 
 const postData = async (url = '', data = {}) => {

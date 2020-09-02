@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-const styles = require('./styles.scss');
+import styles from './styles.scss';
+import GenralPopup from '../GeneralPopup';
 
 
 const Header = ( {title} ) => (
@@ -13,6 +14,7 @@ const Header = ( {title} ) => (
         <li><Link to='/about'>ABOUT</Link></li>
       </ul>
     </div>
+    <GenralPopup showPopup={false} />
   </div>
 );
 export default Header;
