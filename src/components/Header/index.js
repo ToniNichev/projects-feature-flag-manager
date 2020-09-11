@@ -2,6 +2,26 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './styles.scss';
 import GenralPopup from '../GeneralPopup';
+import EventsManager from '../../containers/EventsManager';
+
+let selectedFlagsList = [];
+
+const getSelectedList = () => {
+  return selectedFlagsList;
+}
+
+const setSelectedList = (id) => {
+  selectedFlagsList[id] = true;
+}
+
+const unsetSelectedList = (id) => {
+  delete selectedFlagsList[id];
+}
+
+
+EventsManager.registerEvent('getSelectedList' ,getSelectedList);
+EventsManager.registerEvent('setSelectedList' ,setSelectedList);
+EventsManager.registerEvent('unsetSelectedList' ,unsetSelectedList);
 
 
 const Header = ( {title} ) => (

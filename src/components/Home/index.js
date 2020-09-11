@@ -7,7 +7,7 @@ import poster from '../../utils/postData';
 import EditDelete from '../EditDelete';
 import { apiUrl } from '../../utils/getParams';
 
-class Renderer extends Component {
+class Home extends Component {
   
   
   constructor(props) {
@@ -19,7 +19,6 @@ class Renderer extends Component {
       flagEditable: false,
     };
   }  
-  
 
   addFlag() {
     this.setState({addFlagVisible: true});
@@ -47,7 +46,6 @@ class Renderer extends Component {
   }
 
   render() {
-    console.log(">>>>>>>>>", apiUrl);
     const featureFlags = typeof global.__API_DATA__ !== 'undefined' ? global.__API_DATA__ : window.__API_DATA__;
 
     return (
@@ -56,14 +54,14 @@ class Renderer extends Component {
             <div className={styles.title}>FLAGS</div>
               {featureFlags.map( (flag) => 
                 <div key={flag.flagName} className={styles.flagWrapper}>
-                  <BulletPoint status={this.state.flagEditable} />
+                  <BulletPoint flagName={flag.flagName} status={this.state.flagEditable} />
                   <span className={styles.flagName}>{flag.flagName}</span>
                   <span className={styles.flagValue}><ToggleSwitch featureFlagName={flag.flagName} val={flag.value} /></span>
                 </div>
               )}
           </div>      
           <div className={styles.rightRail}>
-            <button onClick={() => { this.addFlag()} }>ADD</button>
+            <button className={this.state.flagEditable ? styles.addButtonHidden : styles.addButtonVisible } onClick={() => { this.addFlag()} }>ADD</button>
             <EditDelete flagEditable={ this.state.flagEditable } editFlag={ () => { this.editFlag() } } />
           </div>
           {this.state.addFlagVisible ? <AddFlagPopup closePopup={ () => {this.closePopup() } } /> : null}
@@ -73,4 +71,4 @@ class Renderer extends Component {
 
 }
 
-export default Renderer;
+export default Home;

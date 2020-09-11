@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './styles.scss';
 import { apiUrl } from '../../utils/getParams';
 import EventsManager from  '../../containers/EventsManager';
+import poster from '../../utils/postData';
 
 const addFlag = async (closePopup) => {
   const flag = {
@@ -9,27 +10,16 @@ const addFlag = async (closePopup) => {
     "flagName": document.getElementById('addFeatureFlag').querySelector("input.flagName").value ,
     "value": document.getElementById('addFeatureFlag').querySelector("input.value").value,
   };
-  const searchResult = await postData(`${apiUrl}/find`,  {'flagName' : flag.flagName} );  
+  const searchResult = await poster.postData(`${apiUrl}/find`,  {'flagName' : flag.flagName} );  
   if(searchResult.length > 0) {
     EventsManager.callEvent('showPopup')(`Flag with name: ${flag.flagName} already exists!`);
   }
   else {
-    const result = await postData(`${apiUrl}/add`, flag);
+    const result = await poster.postData(`${apiUrl}/add`, flag);
     closePopup();
   }
 }
 
-const postData = async (url = '', data = {}) => {
-  /* Express throws CORS errror on Content-Type: application/json.
-  The solution is to add body-parser and send stringified JSON */
-
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {'Content-Type': 'text/plain' },
-    body: JSON.stringify(data)
-  });
-  return  response.json(); // parses JSON response into native JavaScript objects
-}
 
 const Renderer = ({closePopup}) => {  
   return (

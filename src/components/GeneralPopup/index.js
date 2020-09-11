@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './styles.scss';
-import EvenstManager from '../../containers/EventsManager';
+import EventsManager from '../../containers/EventsManager';
 
 const Renderer = ({showPopup}) => {  
   const [popupVisible, setPopupVisible] = useState(showPopup);
@@ -17,7 +17,7 @@ const Renderer = ({showPopup}) => {
   }
 
   // register global showPopup to be called by other components
-  EvenstManager.registerEvent('showPopup' ,showPopupFunc);
+  EventsManager.registerEvent('showPopup' ,showPopupFunc);
 
   return popupVisible ? (
     <div id="addFeatureFlag" className={styles.modal}>

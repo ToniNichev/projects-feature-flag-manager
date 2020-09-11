@@ -31,6 +31,26 @@
   }
 }
 
+button {
+  border-radius: 5px;  
+  margin-bottom: 5px;
+}
+
+button:hover {
+  border-radius: 5px;
+  background-color: darkgray;
+  color: white;
+  font-weight: 800;
+}
+
+.addButtonVisible {
+  border-radius: 5px;
+}
+
+.addButtonHidden {
+  display: none;
+}
+
 
 .flagValue {
   float: right;

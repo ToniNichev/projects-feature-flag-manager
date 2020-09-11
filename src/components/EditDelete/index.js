@@ -1,11 +1,16 @@
 import React from 'react';
 import styles from './styles.scss';
+import EventsManager from '../../containers/EventsManager';
 
-const editFlag = () => {
+const deleteFlags = () => {
+  const list = EventsManager.callEvent('getSelectedList')();
+  for(var index in list) {
+    console.log(">>>", index);
+  }
 }
 
 
-const Renderer = ({flagEditable, editFlag}) => {  
+const EditDelete = ({flagEditable, editFlag}) => {  
   if(!flagEditable) {
     return (
       <button onClick={() => { editFlag()} }>EDIT</button>
@@ -14,7 +19,7 @@ const Renderer = ({flagEditable, editFlag}) => {
   else {
     return (
       <div>
-        <button className={styles.deleteButton} onClick={() => { editFlag()} }>DELETE</button>
+        <button className={styles.deleteButton} onClick={() => { deleteFlags()} }>DELETE</button>
         <button onClick={() => { editFlag()} }>CANCEL</button>
       </div>
     );
@@ -22,4 +27,4 @@ const Renderer = ({flagEditable, editFlag}) => {
 
 }
 
-export default Renderer;
+export default EditDelete;
