@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles.scss';
-import poster from '../../utils/postData';
+import {Poster} from '../../utils/Poster';
 import { apiUrl } from '../../utils/getParams';
 
 const switchToggled = async (featureFlagName) => {
@@ -12,7 +12,8 @@ const switchToggled = async (featureFlagName) => {
     },
     newFlagData: flag
   }
-  const result = await poster.postData(`${apiUrl}/update`, postData);
+  console.log(">>>", apiUrl);
+  const result = await Poster(`${apiUrl}/update`, postData);
 }
 
 const findFlagByName = (flagName) => {

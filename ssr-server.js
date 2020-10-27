@@ -12,7 +12,7 @@ import templateList from './src/templates/TemplateList';
 import cookieParser from 'cookie-parser';
 import cookiesManagement from './expressMiddlewares/cookiesManagement';
 import requestDataFromAPI from './expressMiddlewares/requestDataFromAPI';
-import pageData from './expressMiddlewares/pageData';
+// import pageData from './expressMiddlewares/pageData';
 import queries from './src/queries';
 import bodyParser from 'body-parser';
 
@@ -137,6 +137,8 @@ app.post('/services/dropdb', async (req, res) => {
 app.get('/*', 
   requestDataFromAPI, 
   function (req, res, next) {
+    console.log(">>>>>");
+    console.log(res);
    response(req, res, req.apiData, req.templateName);
 });
 

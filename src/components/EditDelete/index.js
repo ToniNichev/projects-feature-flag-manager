@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './styles.scss';
 import EventsManager from '../../containers/EventsManager';
+import GenralPopup from '../GeneralPopup';
 
 const deleteFlags = () => {
   const list = EventsManager.callEvent('getSelectedList')();

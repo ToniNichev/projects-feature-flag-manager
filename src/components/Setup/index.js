@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from './styles.scss';
-import poster from '../../utils/postData';
+import Poster from '../../utils/Poster';
 import { apiUrl } from '../../utils/getParams';
 
 const setupDatabase = async () => {
-  const result = await poster.postData(`${apiUrl}/setup`, {});
+  const result = await Poster(`${apiUrl}/setup`, {});
   console.log(result);
 }
 
 const dropDatabase = async () => {
-  const result = await poster.postData(`${apiUrl}/dropdb`, {});
+  const result = await Poster(`${apiUrl}/dropdb`, {});
   console.log(result);
 }
 

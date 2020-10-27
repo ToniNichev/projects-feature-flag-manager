@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles.scss';
 import { apiUrl } from '../../utils/getParams';
 import EventsManager from  '../../containers/EventsManager';
-import poster from '../../utils/postData';
+import {Poster} from '../../utils/Poster';
 
 const addFlag = async (closePopup) => {
   const flag = {
@@ -10,12 +10,12 @@ const addFlag = async (closePopup) => {
     "flagName": document.getElementById('addFeatureFlag').querySelector("input.flagName").value ,
     "value": document.getElementById('addFeatureFlag').querySelector("input.value").value,
   };
-  const searchResult = await poster.postData(`${apiUrl}/find`,  {'flagName' : flag.flagName} );  
+  const searchResult = await Poster(`${apiUrl}/find`,  {'flagName' : flag.flagName} );  
   if(searchResult.length > 0) {
     EventsManager.callEvent('showPopup')(`Flag with name: ${flag.flagName} already exists!`);
   }
   else {
-    const result = await poster.postData(`${apiUrl}/add`, flag);
+    const result = await Poster(`${apiUrl}/add`, flag);
     closePopup();
   }
 }

@@ -7,6 +7,7 @@ const Html = ({ content, cssBundles, jsBundles, apiData }) => (
   <head>
     <meta charSet="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="http://stg-aws01fm.cnbc.com/applications/cnbc.com/resources/newrelic/agent-stage.js"></script>
     <title>Server Side Rendering and Bundle Splitting</title>
 
     { // don't add this to DEV since there it will be served from Webpack-dev-server

@@ -3,7 +3,7 @@ import styles from './styles.scss';
 import ToggleSwitch from '../ToggleSwitch';
 import BulletPoint from '../BulletPoint';
 import AddFlagPopup from '../AddFlagPopup';
-import poster from '../../utils/postData';
+import {Poster} from '../../utils/Poster';
 import EditDelete from '../EditDelete';
 import { apiUrl } from '../../utils/getParams';
 
@@ -33,7 +33,7 @@ class Home extends Component {
     // run this only on client side
     if(typeof window == 'undefined')
       return;
-    const result = await poster.postData(`${apiUrl}/get`, {});
+    const result = await Poster(`${apiUrl}/get`, {});
 
     if(JSON.stringify(result) !== JSON.stringify(window.__API_DATA__)) {
       window.__API_DATA__ = result;
